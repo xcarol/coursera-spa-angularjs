@@ -27,7 +27,10 @@
       { name: "cauliflower", quantity: 2 },
       { name: "carrots", quantity: 50 },
       { name: "lettuce", quantity: 1 },
-      { name: "onions", quantity: 20 }
+      { name: "onions", quantity: 20 },
+      { name: "coriander", quantity: 4 },
+      { name: "potatos", quantity: 15 },
+      { name: "beetroot", quantity: 3 }
     ];
     var itemsBought = [];
 

@@ -13,11 +13,16 @@
         items: '<',
         onRemove: '&'
       },
+      controller: FoundItemsDirectiveController,
       controllerAs: 'ctrl',
       bindToController: true
     };
 
     return ddo;
+  }
+
+  function FoundItemsDirectiveController() {
+    var list = this;
   }
 
   NarrowItDownController.$inject = ['$scope', 'MenuSearchService'];

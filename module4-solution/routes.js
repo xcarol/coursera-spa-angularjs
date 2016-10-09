@@ -14,12 +14,12 @@
     
     .state('home', {
         url: '/',
-        templateUrl: 'index.html'
+        template:'<a ui-sref="categories">See our Premade No Cookie Shopping List!</a>'
     })
     
     .state('categories', {
         url: '/categories',
-        templateUrl: 'categories.template.html',
+        templateUrl: './main-categories.template.html',
         controller: 'CategoriesController as categories',
         resolve: {
             items: ['MenuDataService', function (MenuDataService) {
@@ -28,11 +28,16 @@
         }
     })
     
-    .state('categories.categoryDetail', {
-        templateUrl: 'items.template.html',
-        controller: 'CategoryDetailController as categoryDetail',
+    .state('categories.itemDetail', {
+        templateUrl: './items.template.html',
+        controller: 'CategoryDetailController as itemDetail',
         params: {
             itemId: null
+        },
+        resolve:{
+            itemDetail: ['MenuDataService', function (MenuDataService, params) {
+                return MenuDataService.getItemsForCategory(params.itemId);
+            }]
         }
     });
     

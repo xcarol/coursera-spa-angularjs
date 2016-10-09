@@ -33,12 +33,12 @@
         controller: 'CategoryDetailController as itemDetail',
         params: {
             itemId: null
-        }/*,
+        },
         resolve:{
             itemDetail: ['MenuDataService', function (MenuDataService, params) {
                 return MenuDataService.getItemsForCategory(params.itemId);
             }]
-        }*/
+        }
     });
 
     }

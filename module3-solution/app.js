@@ -3,42 +3,51 @@
 
   angular.module('NarrowItDownApp', [])
          .controller('NarrowItDownController', NarrowItDownController)
-         .directive('foundItems',FoundItems)
-         .service('MenuSearchService', MenuSearchService);
+         .service('MenuSearchService', MenuSearchService)
+         .directive('foundItems', FoundItemsDirective);
+
+  function FoundItemsDirective() {
+    var ddo = {
+      templateUrl: 'foundItems.html',
+      scope: {
+        items: '<',
+        onRemove: '&'
+      },
+      controller: FoundItemsDirectiveController,
+      controllerAs: 'ctrl',
+      bindToController: true
+    };
+
+    return ddo;
+  }
+
+  function FoundItemsDirectiveController() {
+    var list = this;
+  }
 
   NarrowItDownController.$inject = ['$scope', 'MenuSearchService'];
 
-  function FoundItems() {
-      var ddo = {
-        scope: {
-          items: '<',
-          title: '@'
-        },
-      };
-      return ddo;
-  }
-
   function NarrowItDownController($scope, MenuSearchService) {
     var ctrl = this;
-    ctrl.narrowSearch = function(search) {
-      ctrl.found = MenuSearchService.getMatchedMenuItems();
+
+    ctrl.search_term = "";
+
+    ctrl.narrowSearch = function() {
+      if (ctrl.search_term.length == 0) {
+        ctrl.items = [];
+      } else {
+        MenuSearchService.getMatchedMenuItems(ctrl.search_term).then(function(foundItems){
+          ctrl.items = foundItems;
+        });
+      }
+    }
+
+    ctrl.removeItem = function(index) {
+      ctrl.items.splice(index,1);
     }
   }
 
   MenuSearchService.$inject = ['$http'];
-
-  function find_matches (result) {
-    // process result and only keep items that match
-    var foundItems = [];
-    var reg_isearch = new RegExp(searchTerm, "i");
-    for (var i = 0 ; i < result.data.length ; i++) {
-      if (result.data[i].name.search(reg_isearch))
-        foundItems.push(result.data[i]);
-    }
-    console.log("si paso por aqui");
-    console.log(foundItems);
-    return foundItems;
-  };
 
   function MenuSearchService($http) {
     var service = this;
@@ -47,8 +56,18 @@
       return $http({
             method: 'GET',
             url: 'https://davids-restaurant.herokuapp.com/menu_items.json'})
-          .then(find_matches);
+          .then(function (result) {
+            var foundItems = [];
+            var menu_items = result.data.menu_items;
+            var search_regex = new RegExp(searchTerm, "i");
+
+            for(var i = 0 ; i < menu_items.length ; i++) {
+              if (menu_items[i].description.search(search_regex) != -1)
+                foundItems.push(menu_items[i]);
+            }
+
+            return foundItems;
+      });
     }
   }
-
 })();

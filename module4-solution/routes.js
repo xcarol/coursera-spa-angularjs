@@ -14,7 +14,7 @@
     
     .state('home', {
         url: '/',
-        template:'<a ui-sref="categories">See our Premade No Cookie Shopping List!</a>'
+        template:'<a ui-sref="categories">Show menu categories</a>'
     })
     
     .state('categories', {
@@ -27,16 +27,14 @@
             }]
         }
     })
-    
-    .state('categories.itemDetail', {
-        templateUrl: './items.template.html',
-        controller: 'CategoryDetailController as itemDetail',
-        params: {
-            itemId: null
-        },
-        resolve:{
-            itemDetail: ['MenuDataService', function (MenuDataService, params) {
-                return MenuDataService.getItemsForCategory(params.itemId);
+
+    .state('itemDetail', {
+        url:'/item-detail/{itemId}',
+        templateUrl: './main-items.template.html',
+        controller:'DetailsController as details',
+        resolve: {
+            items: ['$stateParams', 'MenuDataService', function ($stateParams, MenuDataService) {
+                return MenuDataService.getItemsForCategory($stateParams.itemId);
             }]
         }
     });

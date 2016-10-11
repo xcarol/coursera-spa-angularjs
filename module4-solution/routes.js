@@ -5,18 +5,18 @@
     .config(RoutesConfig);
 
     RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-    
+
     function RoutesConfig($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
-    
+
     $stateProvider
-    
+
     .state('home', {
         url: '/',
         template:'<a ui-sref="categories">Show menu categories</a>'
     })
-    
+
     .state('categories', {
         url: '/categories',
         templateUrl: './main-categories.template.html',
@@ -38,7 +38,7 @@
             }]
         }
     });
-    
+
     }
 
 })();

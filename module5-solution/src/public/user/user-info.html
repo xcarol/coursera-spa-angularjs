@@ -1,0 +1,34 @@
+<div><div class="container">
+  <h2 class="text-center">User information</h2>
+  <div ng-if="!ctrl.user" class="alert alert-danger" role="alert">
+    Not Signed Up Yet. <a class="alert-link" ui-sref="public.newsletter">Sign up Now!</a>
+  </div>
+  <div class="panel panel-default" ng-if="ctrl.user">
+    <table class="table">
+      <tr>
+        <td class="user-info-title">First name</td>
+        <td class="user-info-text">{{ctrl.user.firstName}}</td>
+      </tr>
+      <tr>
+        <td class="user-info-title">Last name</td>
+        <td class="user-info-text">{{ctrl.user.lastName}}</td>
+      </tr>
+      <tr>
+        <td class="user-info-title">Email address</td>
+        <td class="user-info-text">{{ctrl.user.email}}</td>
+      </tr>
+      <tr>
+        <td class="user-info-title">Phone</td>
+        <td class="user-info-text">{{ctrl.user.phone}}</td>
+      </tr>
+      <tr>
+        <td class="user-info-title">Favorite dish</td>
+        <td class="user-info-text">
+          <h4>{{ctrl.favoriteDish.name}}</h4>
+          <p>{{ctrl.favoriteDish.description}}</p>
+          <p><img ng-src="ctrl.favoriteDish.link"></img></p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div></div>

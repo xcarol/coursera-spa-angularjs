@@ -1,0 +1,41 @@
+<div><div class="container">
+<form name='newsletterSignup' novalidate>
+    <div class="form-group">
+        <label for="firstName">First name</label>
+        <input type="text" class="form-control" name="firstName" ng-model="ctrl.firstName" required>
+        <span ng-if="newsletterSignup.firstName.$error.required && newsletterSignup.firstName.$touched">
+            First name is required
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input type="text" class="form-control" name="lastName" ng-model="ctrl.lastName" required>
+        <span ng-if="newsletterSignup.lastName.$error.required && newsletterSignup.lastName.$touched">
+            Last name is required
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="email">email address</label>
+        <input type="email" class="form-control" name="email" ng-model="ctrl.email"/ required>
+        <span ng-if="newsletterSignup.email.$error.required && newsletterSignup.email.$touched">
+            Email is required
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" class="form-control" name="phone" ng-model="ctrl.phone"/ required>
+        <span ng-if="newsletterSignup.phone.$error.required && newsletterSignup.phone.$touched">
+            Phone is required
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="favorite-dish">Favorite dish</label>
+        <input type="text" class="form-control" name="favoriteDish" ng-model="ctrl.favoriteDish"/ required>
+        <span ng-if="newsletterSignup.favoriteDish.$touched && ctrl.favoriteDishNotFound">
+            No such menu number exists
+        </span>
+    </div>
+    <button ng-click="ctrl.go()" class="btn btn-primary" ng-disabled="newsletterSignup.$invalid">Submit</button>
+</form>
+<span class="label label-success" ng-if="ctrl.isUserRegistered()">Your information has been saved</span>
+</div></div>

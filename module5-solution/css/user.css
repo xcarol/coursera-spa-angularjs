@@ -1,0 +1,10 @@
+.user-info-title {
+    background-color: lightgray;
+    color: black;
+    text-align: right;
+}
+
+.user-info-text {
+    background-color: transparent;
+    color: black;
+}

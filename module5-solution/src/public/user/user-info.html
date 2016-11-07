@@ -22,11 +22,16 @@
         <td class="user-info-text">{{ctrl.user.phone}}</td>
       </tr>
       <tr>
-        <td class="user-info-title">Favorite dish</td>
+        <td class="user-info-title"><h4>Favorite dish</h4></td>
         <td class="user-info-text">
           <h4>{{ctrl.favoriteDish.name}}</h4>
           <p>{{ctrl.favoriteDish.description}}</p>
-          <p><img ng-src="ctrl.favoriteDish.link"></img></p>
+          <p>
+            <img class="img-responsive" width="250" height="150"
+                 ng-src="{{ctrl.ApiPath}}/images/{{ctrl.favoriteDish.short_name}}.jpg"
+                 alt="{{ctrl.favoriteDish.name}}">
+            </img>
+          </p>
         </td>
       </tr>
     </table>

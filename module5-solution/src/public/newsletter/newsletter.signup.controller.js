@@ -13,6 +13,15 @@ function NewsletterSignupController(menuItems, UserService) {
   $ctrl.userService = UserService;
   $ctrl.favoriteDishNotFound = false;
 
+  var userInfo = $ctrl.userService.getUserInfo();
+  if (userInfo) {
+    $ctrl.firstName = userInfo.firstName;
+    $ctrl.lastName = userInfo.lastName;
+    $ctrl.email = userInfo.email;
+    $ctrl.phone = userInfo.phone;
+    $ctrl.favoriteDish = userInfo.favoriteDish;
+  }
+  
   $ctrl.go = function () {
       var foundFavoriteDish = false;
       
